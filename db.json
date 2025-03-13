@@ -1,0 +1,28 @@
+{
+  "tareas": [
+    {
+      "id": "1",
+      "titulo": "Comprar pan",
+      "descripcion": "Ir a la tienda y comprar pan integral",
+      "completado": true
+    },
+    {
+      "id": "3",
+      "titulo": "Prueba Final 2",
+      "descripcion": "Prueba final de adicion",
+      "completado": true
+    },
+    {
+      "id": "2",
+      "titulo": "Desarrollo Front",
+      "descripcion": "Prueba Semisenior",
+      "completado": true
+    },
+    {
+      "id": "4",
+      "titulo": "Desarrollo Back",
+      "descripcion": "Desarrollo Api",
+      "completado": false
+    }
+  ]
+}

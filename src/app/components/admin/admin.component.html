@@ -1,0 +1,122 @@
+<div class="container">
+    <!-- Título del administrador de Tareas -->
+    <div class="title-div">
+        <h1>Panel de Administración de Tareas</h1>
+    </div>
+
+    <br>
+
+    <!-- Botón para abrir el formulario de agregar tarea -->
+    <button class="add-button float-end" (click)="abrirModal()">
+        Agregar Tarea +
+        <i class="fas fa-plus ms-2"></i>
+    </button>
+
+    <!-- Filtro de tareas -->
+    <div class="filter-container">
+        <label for="filtroEstado" class="filter-label">📌 Filtro:</label>
+        <select id="filtroEstado" class="form-select filter-select" [(ngModel)]="filtroEstado">
+            <option value="todas">Todas</option>
+            <option value="completadas">Completadas</option>
+            <option value="pendientes">Pendientes</option>
+        </select>
+    </div>
+
+    <!-- Tabla de Tareas -->
+    <div class="table-container mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of tareasFiltradas">
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.titulo }}</td>
+                    <td>{{ task.descripcion }}</td>
+                    <td class="estado-container">
+                        <span [ngClass]="{ 'completado': task.completado, 'pendiente': !task.completado }">
+                            {{ task.completado ? '✅ Completado' : '❌ Pendiente' }}
+                        </span>
+                        
+                        <!-- Switch para cambiar estado -->
+                        <label class="switch" style="margin-left: 10%;">
+                            <input type="checkbox" [checked]="task.completado" (change)="actualizarEstado(task)">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>                   
+                    <td>
+                        <!-- Boton para editar-->
+                        <button class="btn btn-warning me-2" (click)="editarTarea(task)">
+                            ✏️ Editar
+                        </button>
+                        <!-- Boton para eliminar-->
+                        <button class="btn btn-danger" (click)="eliminarTarea(task.id)">
+                            🗑 Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para agregar/editar tarea -->
+<div *ngIf="mostrarModal" class="modal-backdrop">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>{{ isUpdate ? 'Editar Tarea' : 'Agregar Nueva Tarea' }}</h2>
+            <button (click)="cerrarModal()">✖</button>
+        </div>
+
+        <div class="modal-body">
+            <form [formGroup]="formTasks" (ngSubmit)="isUpdate ? actualizarTarea() : agregarTarea()">
+
+                <div class="form-group">
+                    <label for="id">Código de Tarea:</label>
+                    <input id="id" type="number" formControlName="id" class="form-control" [readonly]="isUpdate"
+                        required />
+                    <div *ngIf="formTasks.get('id')?.invalid && formTasks.get('id')?.touched" class="error">
+                        ⚠ El código debe ser numérico y obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input id="titulo" type="text" formControlName="titulo" class="form-control" required />
+                    <div *ngIf="formTasks.get('titulo')?.invalid && formTasks.get('titulo')?.touched" class="error">
+                        ⚠ El título es obligatorio
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" formControlName="descripcion" class="form-control" required></textarea>
+                    <div *ngIf="formTasks.get('descripcion')?.invalid && formTasks.get('descripcion')?.touched"
+                        class="error">
+                        ⚠ La descripción es obligatoria
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" formControlName="completado" (change)="actualizarCompletado($event)" />
+                        Completado
+                    </label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled]="formTasks.invalid">
+                        {{ isUpdate ? 'Actualizar Tarea' : 'Guardar Tarea' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
