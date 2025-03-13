@@ -6,14 +6,14 @@ import { RouterModule } from '@angular/router';
 export const routes: Routes = [
 
     //Detallan las rutas que debe tomar el proyecto
-    { path: '**', redirectTo: 'admin' } ,
-    { path: '', redirectTo: '/admin', pathMatch: 'full' },
-    { path: 'admin', component: AdminComponent },
+    // { path: 'admin', component: AdminComponent },
+    { path: '', component: AdminComponent , pathMatch: 'full' },
+    { path: '**', component: AdminComponent  } 
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 
 export class AppRoutingModule { }
