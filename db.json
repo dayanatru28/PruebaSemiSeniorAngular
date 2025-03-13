@@ -3,14 +3,14 @@
     {
       "id": "1",
       "titulo": "Comprar pan",
-      "descripcion": "Ir a la tienda y comprar pan integral",
+      "descripcion": "Ir a la tienda y comprar pan integral ",
       "completado": true
     },
     {
       "id": "3",
       "titulo": "Prueba Final 2",
       "descripcion": "Prueba final de adicion",
-      "completado": true
+      "completado": false
     },
     {
       "id": "2",

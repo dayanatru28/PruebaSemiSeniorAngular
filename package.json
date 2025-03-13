@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "json-server": "json-server --watch db.json --port 8080 --host 0.0.0.0"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "bootstrap": "^5.3.3",
     "crud-semi-senior": "file:",
+    "json-server": "^1.0.0-beta.3",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.17.2",
     "tslib": "^2.3.0",

@@ -9,7 +9,7 @@ import { taskDTO } from '../models/task.dto';
 export class AdminTaskService {
 
   //Direccion donde se encuentra el servicio de informacion
-  private apiUrl = 'http://localhost:3000/tareas';
+  private apiUrl = 'https://pruebasemiseniorangular.onrender.com/tareas';
 
   constructor(private http: HttpClient) {}
 
